@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Filters</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+    
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #4055d8;
+            color: #fff;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0 10px;
+        }
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+        .navbar-right {
+            display: flex;
+            align-items: center;
+        }
+        .contact-us {
+            position: relative;
+            margin-right: 40px;
+        }
+        .contact-dropdown {
+            display: none;
+            position: absolute;
+            top: 20px;
+            right: 0;
+            background-color: #fff;
+            color: #000;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .contact-dropdown a {
+            display: block;
+            padding: 10px;
+            color: #000;
+            text-decoration: none;
+        }
+        .contact-dropdown a:hover {
+            background-color: #f0f0f0;
+        }
+        .contact-us:hover .contact-dropdown {
+            display: block;
+        }
+        .hamburger-menu {
+            cursor: pointer;
+            margin-right: 50px;
+        }
+        .hamburger-menu .menu-list {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #fff;
+            color: #000;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .hamburger-menu .menu-list a {
+            display: block;
+            padding: 10px;
+            color: #000;
+            text-decoration: none;
+        }
+        .hamburger-menu .menu-list a:hover {
+            background-color: #f0f0f0;
+        }
+        .hamburger-menu.active .menu-list {
+            display: block;
+        }
+        .contact-icon::before {
+            /* content: '📞'; */
+            margin-right: 5px;
+        }
+        .hamburger-icon::before {
+            /* content: '≡'; */
+            margin-right: 5px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .filters {
+            flex: 1 1 300px;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #ffffff;
+            border-right: 1px solid #dcdcdc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .filters h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .filter-group {
+            margin-bottom: 20px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .filter-group #budget-value {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .properties {
+            flex: 3 1 600px;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .property-card {
+            flex: 1 1 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .property-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .property-info {
+            padding: 15px;
+        }
+
+        .property-info h3 {
+            margin: 10px 0;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .property-info p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .property-info button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+        }
+
+        .property-info button:hover {
+            background-color: #0056b3;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .contact-buttons a {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .contact-buttons a.whatsapp {
+            background-color: #007bff; /* WhatsApp color */
+        }
+
+        .contact-buttons a.call {
+            background-color: #007bff; /* Call color */
+        }
+
+        .filter-group .filter-button {
+            display: inline-block;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        
+        .filter-group select[multiple] {
+            height: auto;
+            overflow-y: auto;
+        }
+
+        @media (max-width: 768px) {
+            .filters {
+                flex: 1 1 100%;
+                border-right: none;
+                border-bottom: 1px solid #dcdcdc;
+            }
+
+            .properties {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="index.html"><img style="width: 110px; height: 70px; margin-left: 40px;" src="images/vimallogo.jpg" alt="Logo" class="logo"></a>
+        </div>
+        <div class="navbar-right">
+            <div class="contact-us">
+                <span class="contact-icon">Contact Us</span>
+                <div class="contact-dropdown">
+                    <a href="#">Email Us</a>
+                    <a href="#">Call Us</a>
+                    <a href="#">Support</a>
+                </div>
+            </div>
+            <div class="hamburger-menu">
+                <span class="hamburger-icon">Menu</span>
+                <div class="menu-list">
+                    <a href="#">Login/Register</a>
+                    <a href="#">For Buyers</a>
+                    <a href="#">For Tenants</a>
+                    <a href="#">For Owners</a>
+                    <a href="#">For Dealers/Builders</a>
+                    <a href="#">Explore our Services</a>
+                    <a href="#">Insights</a>
+                    <a href="#">Articles & News</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Get Help</a>
+                    <a href="#">Customer Services & FAQs</a>
+                    <a href="#">Download App</a>
+                    <a href="#">Search by Property Code</a>
+                    <a href="#">Toll Free Number</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <aside style="border-radius: 10px; " class="filters">
+            <h2>Filters</h2>
+            <div class="filter-group">
+                <label for="budget">Budget</label>
+                <input type="range" id="budget" name="budget" min="0" max="10000000" step="100000">
+                <span id="budget-value">0</span>
+            </div>
+            <div class="filter-group">
+                <label for="property-type">Property Type</label>
+                <button style="color: black;" class="filter-button land">Land/Plots</button>
+                <button style="color: black;" class="filter-button commercial">Commercial</button>
+                <button style="color: black;" class="filter-button pg">PG/Co-living</button>
+            </div>
+            <div class="filter-group">
+                <label for="bedrooms">No. of Bedrooms</label>
+                <select id="bedrooms" name="bedrooms">
+                    <option value="">Any</option>
+                    <option value="1">1 BHK</option>
+                    <option value="2">2 BHK</option>
+                    <option value="3">3 BHK</option>
+                    <option value="4">4 BHK</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="available-for">Available For</label>
+                <button style="color: black;" class="filter-button sale">Sale</button>
+                <button style="color: black;" class="filter-button rent">Rent</button>
+            </div>
+            <div class="filter-group">
+                <label for="posted-by">Posted By</label>
+                <button style="color: black;" class="filter-button owner">Owner</button>
+                <button style="color: black;" class="filter-button dealer">Dealer</button>
+                <button style="color: black;" class="filter-button builder">Builder</button>
+            </div>
+            <div class="filter-group">
+                <label for="furnishing-status">Furnishing Status</label>
+                <select id="furnishing-status" name="furnishing-status">
+                    <option value="">Any</option>
+                    <option value="furnished">Furnished</option>
+                    <option value="unfurnished">Unfurnished</option>
+                    <option value="semi-furnished">Semi-Furnished</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="localities">Localities</label>
+                <select id="localities" name="localities">
+                    <option value="">Select a locality</option>
+                    <option value="delhi">Delhi, Delhi</option>
+                    <option value="mumbai">Mumbai, Maharashtra</option>
+                    <option value="bangalore">Bangalore, Karnataka</option>
+                    <option value="kolkata">Kolkata, West Bengal</option>
+                    <option value="chennai">Chennai, Tamil Nadu</option>
+                    <option value="hyderabad">Hyderabad, Telangana</option>
+                    <option value="lucknow">Lucknow, Uttar Pradesh</option>
+                    <option value="kanpur">Kanpur, Uttar Pradesh</option>
+                    <option value="agra">Agra, Uttar Pradesh</option>
+                    <!-- Add more localities as needed -->
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="area">Area in Sq Ft</label>
+                <input type="number" id="area" name="area">
+            </div>
+            <button style="background-color: #007bff; color: white; border: none; padding: 5px; border-radius: 5px;" id="apply-filters">Apply Filters</button>
+        </aside>
+        <main class="properties" id="properties">
+            <!-- Property cards will be rendered here -->
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+<script>
+    document.querySelector('.hamburger-menu').addEventListener('click', function() {
+        this.classList.toggle('active');
+    });
+</script>
+
+    <script>
+        const properties = [
+            {
+                image: 'https://www.nanduhospitality.com/images/flat-1.jpg',
+                name: 'Luxurious Apartment',
+                location: 'Delhi, Delhi',
+                amount: 1200000,
+                bhk: '3 BHK',
+                contact: 'Contact',
+                availableFor: 'sale',
+                postedBy: 'owner',
+                furnishingStatus: 'furnished',
+                area: 1500,
+                type: 'Residential'
+            },
+            {
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY5luA34hxUTlOFdsk-G-EC9NsGyazIIjSnQ&s',
+                name: 'Beautiful Plot',
+                location: 'Mumbai, Maharashtra',
+                amount: 2000000,
+                bhk: '',
+                contact: 'Contact',
+                availableFor: 'sale',
+                postedBy: 'dealer',
+                furnishingStatus: 'semi-furnished',
+                area: 2500,
+                type: 'Land'
+            },
+            {
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT31xp5OTTMYfKyP0LfoCqp3ibm9-43eLx0Qw&s',
+                name: 'Spacious Office',
+                location: 'Bangalore, Karnataka',
+                amount: 800000,
+                bhk: '',
+                contact: 'Contact',
+                availableFor: 'sale',
+                postedBy: 'builder',
+                furnishingStatus: 'unfurnished',
+                area: 3000,
+                type: 'Commercial'
+            },
+            {
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY5luA34hxUTlOFdsk-G-EC9NsGyazIIjSnQ&s',
+                name: 'Prime Plot',
+                location: 'Kolkata, West Bengal',
+                amount: 500000,
+                bhk: '',
+                contact: 'Contact',
+                availableFor: 'sale',
+                postedBy: 'owner',
+                furnishingStatus: '',
+                area: 2000,
+                type: 'Land'
+            },
+            {
+                image: 'https://www.nanduhospitality.com/images/flat-1.jpg',
+                name: 'Modern Loft',
+                location: 'Hyderabad, Telangana',
+                amount: 850000,
+                bhk: '3 BHK',
+                contact: 'Contact',
+                availableFor: 'sale',
+                postedBy: 'dealer',
+                furnishingStatus: 'semi-furnished',
+                area: 1800,
+                type: 'Residential'
+            },
+            {
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT31xp5OTTMYfKyP0LfoCqp3ibm9-43eLx0Qw&s',
+                name: 'Charming Cottage',
+                location: 'Lucknow, Uttar Pradesh',
+                amount: 600000,
+                bhk: '2 BHK',
+                contact: 'Contact',
+                availableFor: 'rent',
+                postedBy: 'builder',
+                furnishingStatus: 'furnished',
+                area: 1300,
+                type: 'Residential'
+            },
+            {
+                image: 'https://www.nanduhospitality.com/images/flat-1.jpg',
+                name: 'Elegant Apartment',
+                location: 'Kanpur, Uttar Pradesh',
+                amount: 500000,
+                bhk: '3 BHK',
+                contact: 'Contact',
+                availableFor: 'sale',
+                postedBy: 'owner',
+                furnishingStatus: 'furnished',
+                area: 1200,
+                type: 'Residential'
+            },
+            {
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT31xp5OTTMYfKyP0LfoCqp3ibm9-43eLx0Qw&s',
+                name: 'Luxury Villa',
+                location: 'Agra, Uttar Pradesh',
+                amount: 1200000,
+                bhk: '4 BHK',
+                contact: 'Contact',
+                availableFor: 'rent',
+                postedBy: 'dealer',
+                furnishingStatus: 'semi-furnished',
+                area: 2500,
+                type: 'Residential'
+            },
+            {
+                image: 'https://www.nanduhospitality.com/images/flat-1.jpg',
+                name: 'PG Accommodation',
+                location: 'Delhi, Delhi',
+                amount: 15000,
+                bhk: '',
+                contact: 'Contact',
+                availableFor: 'rent',
+                postedBy: 'builder',
+                furnishingStatus: 'furnished',
+                area: 500,
+                type: 'PG/Co-living'
+            },
+            {
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY5luA34hxUTlOFdsk-G-EC9NsGyazIIjSnQ&s',
+                name: 'Commercial Space',
+                location: 'Mumbai, Maharashtra',
+                amount: 2000000,
+                bhk: '',
+                contact: 'Contact',
+                availableFor: 'sale',
+                postedBy: 'dealer',
+                furnishingStatus: 'unfurnished',
+                area: 5000,
+                type: 'Commercial'
+            }
+            // Add more property objects as needed
+        ];
+
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                budget: params.get('budget'),
+                propertyType: params.get('property-type'),
+                bedrooms: params.get('bedrooms'),
+                availableFor: params.get('available-for'),
+                postedBy: params.get('posted-by'),
+                furnishingStatus: params.get('furnishing-status'),
+                localities: params.get('localities'),
+                area: params.get('area')
+            };
+        }
+
+        // Filter properties based on query parameters
+        function filterProperties(properties, filters) {
+            return properties.filter(property => {
+                const matchesBudget = property.amount >= (filters.budget || 0);
+                const matchesType = !filters.propertyType || property.type.toLowerCase() === filters.propertyType.toLowerCase();
+                const matchesBedrooms = !filters.bedrooms || property.bhk.startsWith(filters.bedrooms);
+                const matchesAvailableFor = !filters.availableFor || property.availableFor.toLowerCase() === filters.availableFor.toLowerCase();
+                const matchesPostedBy = !filters.postedBy || property.postedBy.toLowerCase() === filters.postedBy.toLowerCase();
+                const matchesFurnishingStatus = !filters.furnishingStatus || property.furnishingStatus.toLowerCase() === filters.furnishingStatus.toLowerCase();
+                const matchesLocalities = !filters.localities || property.location.toLowerCase().includes(filters.localities.toLowerCase());
+                const matchesArea = !filters.area || property.area >= filters.area;
+
+                return matchesBudget && matchesType && matchesBedrooms && matchesAvailableFor && matchesPostedBy && matchesFurnishingStatus && matchesLocalities && matchesArea;
+            });
+        }
+
+        function renderProperties(propertiesToRender) {
+            const propertiesContainer = document.getElementById('properties');
+            propertiesContainer.innerHTML = '';
+
+            propertiesToRender.forEach(property => {
+                const propertyCard = document.createElement('div');
+                propertyCard.classList.add('property-card');
+                
+                propertyCard.innerHTML = `
+                    <img src="${property.image}" alt="Property Image">
+                    <div class="property-info">
+                        <h3>${property.name}</h3>
+                        <p>Location: ${property.location}</p>
+                        <p>Amount: $${property.amount.toLocaleString()}</p>
+                        <p>BHK: ${property.bhk || 'N/A'}</p>
+                        <p>Area: ${property.area} Sq Ft</p>
+                        <div class="contact-buttons">
+                            <a href="https://wa.me/YOUR_WHATSAPP_NUMBER" class="whatsapp" target="_blank">Send via WhatsApp</a>
+                            <a href="tel:+YOUR_PHONE_NUMBER" class="call">Call Now</a>
+                        </div>
+                    </div>
+                `;
+
+                propertiesContainer.appendChild(propertyCard);
+            });
+        }
+
+        function applyFilters() {
+            const budget = parseInt(document.getElementById('budget').value);
+            const bedrooms = document.getElementById('bedrooms').value;
+            const availableFor = document.querySelector('.filter-button.sale.active') ? 'sale' : 
+                (document.querySelector('.filter-button.rent.active') ? 'rent' : '');
+            const postedBy = document.querySelector('.filter-button.owner.active') ? 'owner' :
+                (document.querySelector('.filter-button.dealer.active') ? 'dealer' : 
+                (document.querySelector('.filter-button.builder.active') ? 'builder' : ''));
+            const propertyType = document.querySelector('.filter-button.land.active') ? 'Land' :
+                (document.querySelector('.filter-button.commercial.active') ? 'Commercial' :
+                (document.querySelector('.filter-button.pg.active') ? 'PG/Co-living' : 'Residential'));
+            const furnishingStatus = document.getElementById('furnishing-status').value;
+            const localities = document.getElementById('localities').value.toLowerCase();
+            const area = parseInt(document.getElementById('area').value);
+
+            const filteredProperties = properties.filter(property => {
+                return (
+                    (!budget || property.amount <= budget) &&
+                    (!bedrooms || property.bhk === `${bedrooms} BHK`) &&
+                    (!availableFor || property.availableFor === availableFor) &&
+                    (!postedBy || property.postedBy === postedBy) &&
+                    (!propertyType || property.type === propertyType) &&
+                    (!furnishingStatus || property.furnishingStatus === furnishingStatus) &&
+                    (!localities || property.location.toLowerCase().includes(localities)) &&
+                    (!area || property.area >= area)
+                );
+            });
+
+            renderProperties(filteredProperties);
+        }
+
+        document.getElementById('budget').addEventListener('input', function() {
+            document.getElementById('budget-value').textContent = `$${this.value.toLocaleString()}`;
+        });
+
+        document.getElementById('apply-filters').addEventListener('click', applyFilters);
+
+        document.querySelectorAll('.filter-button').forEach(button => {
+            button.addEventListener('click', function() {
+                this.classList.toggle('active');
+                applyFilters();
+            });
+        });
+
+        // Extract query parameters
+        const filters = getQueryParams();
+
+        // Filter and render properties
+        const filteredProperties = filterProperties(properties, filters);
+        renderProperties(filteredProperties);
+    </script>
+</body>
+</html>

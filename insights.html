@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+  body{
+    margin: 0;
+  }
+
+  .navbar {
+    background-color: #1e90ff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    padding: 0 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    width: 100px;
+    height: 60px;
+    transition: transform 0.3s;
+}
+
+.logo img:hover {
+    transform: scale(1.1);
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.search-container .dropdown select {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.search-container .dropdown select:hover {
+    background-color: #f0f0f0;
+}
+
+.search-container input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+
+.search-container input:focus {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+.icons .icon-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.icons .icon-btn:hover {
+    transform: scale(1.1);
+    color: #ffd700;
+}
+
+.right-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.post-property-btn {
+    border-radius: 10px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    background-color: #ffd700;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.post-property-btn img {
+    width: 20px;
+    margin-left: 10px;
+}
+
+.post-property-btn:hover {
+    background-color: #ffc107;
+    transform: scale(1.05);
+}
+
+.dropdown1, .dropdown2 {
+    position: relative;
+}
+
+.dropdown1-content, .dropdown2-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.dropdown1:hover .dropdown1-content, .dropdown2:hover .dropdown2-content {
+    display: block;
+}
+
+.dropdown1-content a, .dropdown2-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown1-content a:hover, .dropdown2-content a:hover {
+    background-color: #1e90ff;
+    color: white;
+}
+
+.dot {
+    background-color: red;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-left: -10px;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.icon-btn:hover {
+    transform: scale(1.1);
+    color: #ffd700;
+}
+
+.toggle-btn {
+    display: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+    }
+
+    .search-container, .right-nav {
+        flex-direction: column;
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .search-container input {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .post-property-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .right-nav {
+        display: none;
+    }
+
+    .right-nav.show {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .toggle-btn {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-container {
+        margin-left: 0;
+    }
+}
+
+
+.sidebar {
+    width: 100px;
+    height: 100vh;
+    background-color: #0b80f4;
+    position: absolute;
+    top: 20;
+    left: 0;
+    overflow-y: auto;
+    
+}
+
+.sidebar:hover {
+    width: 200px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    width: 100%;
+    text-align: left;
+}
+
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #575757;
+}
+
+.sidebar ul li a i {
+    margin-right: 15px;
+}
+
+.sidebar-text {
+    font-size: 16px;
+}
+
+.sidebar-text {
+    display: none;
+}
+
+.sidebar:hover .sidebar-text {
+    display: inline;
+}
+
+.sidebar ul li {
+    padding: 10px;
+}
+
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+}
+
+.sidebar ul li i {
+    margin-right: 10px;
+}
+
+
+.insight-section {
+    background-color: #cedcec;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.insight-section .container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.insight-icon {
+    font-size: 50px;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 28px;
+    color: #333;
+    margin: 0 0 10px;
+}
+
+p {
+    font-size: 16px;
+    color: #666;
+    margin: 0 0 20px;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-bar input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 300px;
+    margin-right: 10px;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.search-bar button i {
+    margin-right: 5px;
+}
+
+.search-bar button:hover {
+    background-color: #0056b3;
+}
+
+
+.latest-updates {
+    text-align: center;
+    padding: 20px;
+}
+
+.slider-container {
+    position: relative;
+    width: 80%;
+    max-width: 900px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 14.3333%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.slide img {
+    width: 100px;
+    height: 100px;
+    border: 2px solid blue;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+.slider-prev-btn, .slider-next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 15px;
+    z-index: 100;
+    border-radius: 50%;
+}
+
+.slider-prev-btn {
+    left: 10px;
+}
+
+.slider-next-btn {
+    right: 10px;
+}
+
+.insights-section {
+    margin:40px 150px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(206, 238, 250);
+    border-radius: 5px;
+    margin-bottom: 60px;
+}
+
+.insights-section-container{
+    display: flex;
+    align-items: center;
+}
+
+.left-side {
+    display: flex;
+    align-items: center;
+    padding-top: 50px;
+    padding-left: 30px;
+}
+
+.icon-text {
+    display: flex;
+    align-items: center;
+}
+
+.icon-text img {
+    width: 50px; /* Adjust size as needed */
+    height: 50px; /* Adjust size as needed */
+    margin-right: 10px;
+}
+
+.right-side {
+    text-align: right;
+    padding-top: 40px;
+    padding-left: 500px;
+}
+
+.icon-texts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.sliding-text {
+    margin-top: 3px;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 400px; /* Adjust as needed */
+    height: 40px; /* Adjust based on your content height */
+}
+
+.sliding-text p {
+    display: inline-block;
+    white-space: nowrap;
+    animation: slide 10s linear infinite;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(100%);
+    }
+    50% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+
+.view-all-btn {
+    background-color: #ffffff; /* Example button styling */
+    color: rgb(31, 101, 223);
+    padding: 8px 16px;
+    border-radius: 4px;
+    border:2px solid #0056b3;
+    text-decoration: none;
+}
+
+.view-all-btn:hover {
+    background-color: #0056b3;
+    color: #f1f1f1;
+    text-decoration: none;
+}
+
+.card-slider-container {
+    position: relative;
+    margin: 30px; 
+}
+
+.card-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.card {
+    flex: 0 0 auto;
+    width: 250px; /* Adjust card width */
+    margin: 10px; /* Adjust spacing between cards */
+    background-color: #f8f9fa; /* Card background color */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Example shadow */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.card img {
+    width: 50px; 
+    height: 50px; 
+    
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-content h3 {
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    font-size: 14px;
+    color: #555;
+}
+
+.prev-btn, .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.prev-btn {
+    left: 0;
+}
+
+.next-btn {
+    right: 0;
+}
+
+.prev-btn:hover, .next-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+.guides-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.guides-section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.guides-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.guide-card {
+    width: 200px;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    color: #fff;
+}
+
+.guide-card img {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+}
+
+.guide-content {
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.guide-content h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+/* Add media queries for responsiveness */
+@media (max-width: 768px) {
+    .guides-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.footer-section {
+    display: flex;
+    justify-content: space-between;
+    background-color: #010101;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-columns {
+    display: flex;
+    flex: 3; /* 60% of the section */
+    flex-wrap: wrap;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+}
+
+.contact-column {
+    flex: 2; /* 40% of the section */
+}
+
+.footer-column h3, .footer-column h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+    text-decoration: none;
+    color: #eeeff0;
+}
+
+.footer-column ul li a:hover {
+    text-decoration: underline;
+}
+
+.footer-column p {
+    margin: 8px 0;
+    color: white;
+}
+
+.footer-column a {
+    color: #dbdee0;
+    text-decoration: none;
+}
+
+.footer-column a:hover {
+    text-decoration: underline;
+}
+
+.app-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.app-badge {
+    width: 150px;
+    height: auto;
+}
+
+.social-media-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.social-icon {
+    width: 32px;
+    height: 32px;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html"><img src="images/vimallogo.jpg" alt="Logo"></a>
+            </div>
+            <div class="search-container">
+                <div class="dropdown">
+                    <select name="search-type" id="search-type">
+                        <option value="buy">Buy</option>
+                        <option value="rent">Rent</option>
+                        <option value="pg">PG</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+                <input type="text" placeholder="Enter place/locality/landmark/project/society">
+                <div class="icons">
+                    <button class="icon-btn"><i class="fa fa-map-marker" aria-hidden="true"></i></button>
+                    <button class="icon-btn"><i class="fa fa-microphone" aria-hidden="true"></i></button>
+                    <button class="icon-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </div>
+            </div>
+            <div class="right-nav">
+                <a href="postproperty.html"><button class="post-property-btn">Post Property<img src="https://pnghq.com/wp-content/uploads/download-free-free-png-photo-images-and-clipart-28353.png" alt="Post"></button></a>
+                <div class="dropdown2">
+                    <button class="icon-btn"><i class="fa fa-headset" aria-hidden="true"></i></button>
+                    <div class="dropdown2-content">
+                        <a href="#">Support</a>
+                    </div>
+                </div>
+                <div class="dropdown1">
+                    <button class="icon-btn"><i class="fa fa-user" aria-hidden="true"></i></button>
+                    <span class="dot"></span>
+                    <div class="dropdown1-content">
+                        <a href="#">LOGIN/REGISTER</a>
+                        <div>
+                            <a href="#">MY ACTIVITY</a>
+                            <div>
+                                <a href="#">Recently Viewed</a>
+                                <a href="#">Recently Searched</a>
+                                <a href="#">Shortlisted</a>
+                                <a href="#">Contacted</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="toggle-btn">
+                <button class="icon-btn"><i class="fa fa-bars" aria-hidden="true"></i></button>
+            </div>
+        </nav>
+    </header>
+
+<!-- sidebar -->
+<div style="top: 80px;" class="sidebar">
+    <ul>
+        <li>
+            <a href="#">
+                <i class="fa fa-lightbulb"></i>
+                <span class="sidebar-text">Insights</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-search"></i>
+                <span class="sidebar-text">Search</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-heart"></i>
+                <span class="sidebar-text">Favorites</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-user"></i>
+                <span class="sidebar-text">Profile</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-dollar-sign"></i>
+                <span class="sidebar-text">Transaction Price</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-home"></i>
+                <span class="sidebar-text">My Property Insight</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-chart-line"></i>
+                <span class="sidebar-text">Price Trends</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-map-marker-alt"></i>
+                <span class="sidebar-text">Locality Insights</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-star"></i>
+                <span class="sidebar-text">Ratings & Reviews</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-newspaper"></i>
+                <span class="sidebar-text">Articles</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-bullhorn"></i>
+                <span class="sidebar-text">News</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-book"></i>
+                <span class="sidebar-text">Guides</span>
+            </a>
+        </li>
+        <!-- Add more items as needed -->
+    </ul>
+</div>
+
+    <!-- insight -->
+    <section class="insight-section">
+        <div class="container">
+            <div class="insight-icon">
+                <i class="fa fa-lightbulb"></i> <!-- Replace with your insight icon -->
+            </div>
+            <h2>Discover Best Places to Live!</h2>
+            <p>Understand localities, check property rates, reviews, transaction prices & more</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Enter place/locality/landmark/project/society">
+                <button type="button"><i class="fa fa-search"></i> Search Insight</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- latest updates -->
+    <section class="latest-updates">
+        <h2>Latest Updates</h2>
+        <div class="slider-container">
+            <button class="prev-btn">&#10094;</button>
+            <div class="slider">
+                <div class="slide"><img src="images/updates.jpeg" alt="Update 1"></div>
+                <div class="slide"><img src="images/updates1.jpeg" alt="Update 2"></div>
+                <div class="slide"><img src="images/updates2.jpeg" alt="Update 3"></div>
+                <div class="slide"><img src="images/updates3.jpeg" alt="Update 4"></div>
+                <div class="slide"><img src="images/updates4.jpeg" alt="Update 5"></div>
+                <div class="slide"><img src="images/updates.jpeg" alt="Update 6"></div>
+                <div class="slide"><img src="images/updates1.jpeg" alt="Update 7"></div>
+            </div>
+            <button class="next-btn">&#10095;</button>
+        </div>
+    </section>
+
+    <!-- insights section -->
+    <section class="insights-section">
+        <div class="insights-section-container">
+            <div  class="left-side">
+                <div class="icon-text">
+                    <img src="https://static.99acres.com/universalapp/img/batch_prediction.png" alt="Insight Icon">
+                    <span>Insights & Tools</span>
+                </div>
+            </div>
+            <div class="right-side">
+                <a href="#" class="view-all-btn">View All Insights</a>
+            </div>
+        </div>
+        <div class="card-slider-container">
+            <button class="slider-prev-btn">&#10094;</button>
+            <div class="card-slider">
+                <div class="card">
+                    <img src="https://www.99acres.com/universalapp/img/PriceTrend2.png" alt="Icon 1">
+                    <div class="card-content">
+                        <h3>Card 1 Heading</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://www.99acres.com/universalapp/img/LocalityInsights2.png" alt="Icon 2">
+                    <div class="card-content">
+                        <h3>Card 2 Heading</h3>
+                        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://www.99acres.com/universalapp/img/ReviewsRatings2.png" alt="Icon 3">
+                    <div class="card-content">
+                        <h3>Card 3 Heading</h3>
+                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://www.99acres.com/universalapp/img/TransactionPrices2.png" alt="Icon 4">
+                    <div class="card-content">
+                        <h3>Card 4 Heading</h3>
+                        <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://www.99acres.com/universalapp/img/AboutMyProperty2.png" alt="Icon 5">
+                    <div class="card-content">
+                        <h3>Card 5 Heading</h3>
+                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://www.99acres.com/universalapp/img/ReadIcons2.png" alt="Icon 5">
+                    <div class="card-content">
+                        <h3>Card 5 Heading</h3>
+                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://www.99acres.com/universalapp/img/GuidesDesktop.png" alt="Icon 5">
+                    <div class="card-content">
+                        <h3>Card 5 Heading</h3>
+                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://www.99acres.com/universalapp/img/NewsDesktop.png" alt="Icon 5">
+                    <div class="card-content">
+                        <h3>Card 5 Heading</h3>
+                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://www.99acres.com/universalapp/img/EMICalculator2.png" alt="Icon 5">
+                    <div class="card-content">
+                        <h3>Card 5 Heading</h3>
+                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://www.99acres.com/universalapp/img/AreaConverter2.png" alt="Icon 5">
+                    <div class="card-content">
+                        <h3>Card 5 Heading</h3>
+                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="slider-next-btn">&#10095;</button>
+        </div>
+    </section>
+
+    <!-- guide section -->
+    <div class="guides-section">
+        <h2>Start with These Guides</h2>
+        <div class="guides-container">
+            <div class="guide-card" style="background-color: #e3dba9;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJdgiqbSXdwqM15plbc-h5UqsZvM3yZMKuyg&s" alt="Buyers Guide">
+                <div class="guide-content">
+                    <h3>Buyer's Guide</h3>
+                </div>
+            </div>
+            <div class="guide-card" style="background-color: #b28fd2;">
+                <img src="https://static.vecteezy.com/system/resources/previews/009/225/586/non_2x/tenants-residents-icon-with-a-house-vector.jpg" alt="Tenants Guide">
+                <div class="guide-content">
+                    <h3>Tenant's Guide</h3>
+                </div>
+            </div>
+            <div class="guide-card" style="background-color: #cb8c81;">
+                <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1VhFi8G7znOCm9hq86s5A9IYPD-m28M_LWg&s" alt="Sellers Guide">
+                <div class="guide-content">
+                    <h3>Seller's Guide</h3>
+                </div>
+            </div>
+            <div class="guide-card" style="background-color: #6a8fae;">
+                <img src="https://img.freepik.com/premium-vector/inside-house-icon-designation-indoor-use-interior-work_946691-3508.jpg" alt="Home Interior Guide">
+                <div class="guide-content">
+                    <h3>Home Interior Guide</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <footer class="footer-section">
+        <div class="footer-columns">
+            <div class="footer-column">
+                <h3>GDA Gkp Property</h3>
+                <ul>
+                    <li><a href="#">Mobile Apps</a></li>
+                    <li><a href="#">Our Services</a></li>
+                    <li><a href="#">Price Trends</a></li>
+                    <li><a href="#">Post your Property</a></li>
+                    <li><a href="#">Real Estate Investments</a></li>
+                    <li><a href="#">Builders in India</a></li>
+                    <li><a href="#">Area Converter</a></li>
+                    <li><a href="#">Articles</a></li>
+                    <li><a href="#">Rent Receipt</a></li>
+                    <li><a href="#">Customer Service</a></li>
+                    <li><a href="#">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Careers with us</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Request Info</a></li>
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Report a problem</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Summons/Notices</a></li>
+                    <li><a href="#">Grievances</a></li>
+                    <li><a href="#">Safety Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Our Partners</h3>
+                <ul>
+                    <li><a href="#">Naukri.com - Jobs in India</a></li>
+                    <li><a href="#">Naukrigulf.com - Jobs in middle east</a></li>
+                    <li><a href="#">Jeevansathi.com - Matrimonials</a></li>
+                    <li><a href="#">Brijj.com - Professional Networking</a></li>
+                    <li><a href="#">Shiksha.com - Education Career Info</a></li>
+                    <li><a href="#">Policybazaar.com - Insurance India</a></li>
+                    <li><a href="#">Meritnation.com - Online Educational Assessment</a></li>
+                    <li><a href="#">PaisaBazaar.com</a></li>
+                    <li><a href="#">AmbitionBox.com</a></li>
+                    <li><a href="#">FirstNaukri.com - A jobsite for campus hiring</a></li>
+                    <li><a href="#">Jobhai.com – Find Jobs Near You</a></li>
+                    <li><a href="#">Techminis.com - Tech news on the go</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-column contact-column">
+            <h3>Contact Us</h3>
+            <p>Toll Free - 1800 41 99099</p>
+            <p>9:30 AM to 6:30 PM (Mon-Sun)</p>
+            <p>Email - feedback@gdagkp.com</p>
+            <h4>Connect with us</h4>
+            <div class="social-media-icons">
+                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                    <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+                  </svg></a>
+                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+                    <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                  </svg></a>
+                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                    <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+                  </svg></a>
+                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
+                    <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/>
+                  </svg></a>
+            </div>
+            <p>Download the App</p>
+            <div class="app-buttons">
+                <a href="#" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="app-badge">
+                </a>
+                <a href="#" target="_blank">
+                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="app-badge">
+                </a>
+            </div>
+            <p style="font-size: 10px; color: #67696d;">Usage of GDAGkp_property.com to upload content showing area in non standard units or which enables targeting by religion/community/caste/race is prohibited. Please report inappropriate content by writing to us at <a href="mailto:">report abuse</a></p>
+            <p>All trademarks are the property of their respective owners. All rights reserved - Info Edge (India) Ltd. A naukri.com group venture.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        // JavaScript to toggle the dropdowns in mobile view
+        document.querySelector('.toggle-btn button').addEventListener('click', () => {
+            document.querySelector('.right-nav').classList.toggle('show');
+        });
+    </script>
+
+
+      <script>
+       const slider = document.querySelector('.slider');
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
+let currentIndex = 0;
+
+prevBtn.addEventListener('click', () => {
+    if (currentIndex > 0) {
+        currentIndex--;
+        slider.style.transform = `translateX(-${currentIndex * 33.3333}%)`;
+    }
+});
+
+nextBtn.addEventListener('click', () => {
+    if (currentIndex < slider.children.length / 3 - 1) {
+        currentIndex++;
+        slider.style.transform = `translateX(-${currentIndex * 33.3333}%)`;
+    }
+});
+      </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cardSlider = document.querySelector('.card-slider');
+        const prevBtn = document.querySelector('.slider-prev-btn');
+        const nextBtn = document.querySelector('.slider-next-btn');
+    
+        const cardWidth = document.querySelector('.card').offsetWidth;
+        const cardMargin = parseInt(window.getComputedStyle(document.querySelector('.card')).marginRight);
+    
+        let scrollAmount = 0;
+        const step = cardWidth + cardMargin;
+    
+        nextBtn.addEventListener('click', () => {
+            if (scrollAmount < (cardSlider.scrollWidth - cardSlider.clientWidth)) {
+                scrollAmount += step;
+                cardSlider.scrollTo({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    
+        prevBtn.addEventListener('click', () => {
+            if (scrollAmount > 0) {
+                scrollAmount -= step;
+                cardSlider.scrollTo({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    </script>
+    
+
+</body>
+</html>

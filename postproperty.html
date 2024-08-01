@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Property-GDA GKP Property</title>
+    <style>
+        /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navbar Styles */
+.navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background: linear-gradient(90deg, rgba(252,249,249,1) 5%, rgba(16,16,16,1) 100%);
+            color: #fff;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0 10px;
+        }
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+        .navbar-right {
+            display: flex;
+            align-items: center;
+        }
+        .contact-us {
+            position: relative;
+            margin-right: 40px;
+        }
+        .contact-dropdown {
+            display: none;
+            position: absolute;
+            top: 20px;
+            right: 0;
+            background-color: #fff;
+            color: #000;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .contact-dropdown a {
+            display: block;
+            padding: 10px;
+            color: #000;
+            text-decoration: none;
+        }
+        .contact-dropdown a:hover {
+            background-color: #f0f0f0;
+        }
+        .contact-us:hover .contact-dropdown {
+            display: block;
+        }
+        .hamburger-menu {
+            cursor: pointer;
+            margin-right: 50px;
+        }
+        .hamburger-menu .menu-list {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #fff;
+            color: #000;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .hamburger-menu .menu-list a {
+            display: block;
+            padding: 10px;
+            color: #000;
+            text-decoration: none;
+        }
+        .hamburger-menu .menu-list a:hover {
+            background-color: #f0f0f0;
+        }
+        .hamburger-menu.active .menu-list {
+            display: block;
+        }
+        .contact-icon::before {
+            /* content: '📞'; */
+            margin-right: 5px;
+        }
+        .hamburger-icon::before {
+            content: '≡';
+            margin-right: 5px;
+        }
+
+/* Header Styles */
+.header {
+    text-align:left;
+    padding: 50px 20px;
+    background: linear-gradient(to right, #e8eaed, #ffffff);
+    color: rgb(9, 9, 9);
+}
+
+.header h1 {
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.header span {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.header h2 {
+    font-size: 1.5em;
+    margin-top: 30px;
+}
+
+.header p {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+/* Card Styles */
+    .cards-container {
+            border-radius: 8px;
+            margin-top: 40px;
+            width: 500px;
+            margin-left: 30px;
+            padding: 25px;
+            height: 600px;
+            box-shadow: 5px 5px 10px 10px lightblue;
+        }
+        .cards h2 {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+        .cards p {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .cards div {
+            margin-bottom: 15px;
+        }
+        .property-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .property-select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .options-container {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+            padding-left: 20px;
+        }
+        .option-group label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+        .submit-button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background-color: #218838;
+        }
+        .phone_inpWraP {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .phone_inpWraP input,
+        .phone_inpWraP select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .leftIcon {
+            margin-left: 10px;
+        }
+        .preference-option {
+            cursor: pointer;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .preference-option.selected {
+            background-color: #007bff;
+            color: white;
+        }
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .header {
+        padding: 30px 10px;
+    }
+
+    .header h1 {
+        font-size: 2em;
+    }
+
+    .header h2 {
+        font-size: 1.2em;
+    }
+
+    .header p {
+        font-size: 1em;
+    }
+
+    .card-container {
+        padding: 10px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .navbar-right {
+        flex-direction: column;
+    }
+
+    .contact-us {
+        margin-bottom: 10px;
+    }
+
+    .hamburger-menu {
+        display: none;
+    }
+}
+
+.property-section {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.property-section h5 {
+    color: #007bff;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.property-section h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center; /* Center the cards */
+    flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+    gap: 20px; /* Space between cards */
+}
+
+.card {
+    width: 100%;
+    max-width: 280px; /* Adjusted width for better spacing */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.icon svg {
+    width: 40px;
+    height: 40px;
+    color: #007bff;
+}
+
+.card h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.card p {
+    font-size: 16px;
+    color: #666;
+}
+
+button {
+    display: inline-block;
+    background-color: rgb(66, 144, 240);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+    border: none;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+button:hover {
+    background-color: rgb(54, 126, 209);
+    transform: scale(1.05);
+}
+
+button a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card-container {
+        flex-direction: column; /* Stack cards vertically on smaller screens */
+        align-items: center;
+    }
+
+    .card {
+        max-width: 90%; /* Make cards larger on smaller screens */
+    }
+
+    button {
+        margin-left: 0;
+    }
+}
+
+
+
+.info {
+    background-color: #f4f6f8;
+    padding: 40px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.info-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.info-subtitle {
+    color: #007bff;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.info-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.info-text {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.info-button {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.info-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+
+
+
+.faq-section {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.faq-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.accordion {
+    text-align: left;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.accordion-button {
+    background-color: #f7f7f7;
+    color: #333;
+    padding: 15px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-button:hover {
+    background-color: #e7e7e7;
+}
+
+.accordion-content {
+    padding: 15px;
+    display: none;
+    background-color: #fafafa;
+    border-top: 1px solid #ddd;
+}
+
+.accordion-content p {
+    margin: 0;
+    font-size: 16px;
+    color: #666;
+}
+
+.testimonial-section {
+    padding: 50px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.testimonial-header h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.testimonial-header p {
+    font-size: 18px;
+    margin-bottom: 40px;
+    color: #555;
+}
+
+.testimonial-slider {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.testimonial-cards-wrapper {
+    overflow: hidden;
+    width: 100%;
+}
+
+.testimonial-cards {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.testimonial-card {
+    min-width: 250px;
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.testimonial-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.testimonial-card h4 {
+    font-size: 18px;
+    color: #333;
+    margin: 5px 0;
+}
+
+.testimonial-card p {
+    font-size: 14px;
+    color: #888;
+}
+
+.slider-prev,
+.slider-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    font-size: 24px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.slider-prev {
+    left: 10px;
+}
+
+.slider-next {
+    right: 10px;
+}
+
+/* Responsive Styles */
+@media (min-width: 768px) {
+    .testimonial-card {
+        flex: 1 0 45%; /* 2 cards per row */
+    }
+}
+
+@media (min-width: 1024px) {
+    .testimonial-card {
+        flex: 1 0 30%; /* 3 cards per row */
+    }
+}
+
+
+/* testimonial ends */
+
+.footer-section {
+    display: flex;
+    justify-content: space-between;
+    background-color: #010101;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-columns {
+    display: flex;
+    flex: 3; /* 60% of the section */
+    flex-wrap: wrap;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+}
+
+.contact-column {
+    flex: 2; /* 40% of the section */
+}
+
+.footer-column h3, .footer-column h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+    text-decoration: none;
+    color: #eeeff0;
+}
+
+.footer-column ul li a:hover {
+    text-decoration: underline;
+}
+
+.footer-column p {
+    margin: 8px 0;
+    color: white;
+}
+
+.footer-column a {
+    color: #dbdee0;
+    text-decoration: none;
+}
+
+.footer-column a:hover {
+    text-decoration: underline;
+}
+
+.app-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.app-badge {
+    width: 150px;
+    height: auto;
+}
+
+.social-media-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.social-icon {
+    width: 32px;
+    height: 32px;
+}
+
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="index.html"><img style="width: 110px; height: 70px; margin-left: 40px;" src="images/vimallogo.jpg" alt="Logo" class="logo"></a>
+        </div>
+        <div class="navbar-right">
+            <div class="contact-us">
+                <span class="contact-icon">Contact Us</span>
+                <div class="contact-dropdown">
+                    <a href="#">Email Us</a>
+                    <a href="#">Call Us</a>
+                    <a href="#">Support</a>
+                </div>
+            </div>
+            <div class="hamburger-menu">
+                <span class="hamburger-icon">Menu</span>
+                <div class="menu-list">
+                    <a href="#">Login/Register</a>
+                    <a href="#">For Buyers</a>
+                    <a href="#">For Tenants</a>
+                    <a href="#">For Owners</a>
+                    <a href="#">For Dealers/Builders</a>
+                    <a href="#">Explore our Services</a>
+                    <a href="#">Insights</a>
+                    <a href="#">Articles & News</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Get Help</a>
+                    <a href="#">Customer Services & FAQs</a>
+                    <a href="#">Download App</a>
+                    <a href="#">Search by Property Code</a>
+                    <a href="#">Toll Free Number</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Header -->
+    <div style="display: flex;">
+    <header class="header">     
+            <h1>Sell or Rent Property online faster<br>with GDA GKP Property</h1>
+            <span>✅Advertise for FREE</span>
+            <span>✅Get unlimited enquiries</span>
+            <span>✅Get shortlisted buyers and tenants</span>
+            <span>✅Assistance in coordinating site visits</span>
+            <img src="images/sell or rent.webp" alt="">
+    </header>
+            <!-- Card Section -->
+            <div class="cards-container">
+                <form id="property-form">
+                    <div class="cards">
+                        <div data-label="POST_PROPERTY" topmost="true">
+                            <div id="CollapsiblePreference-widget">
+                                <div>
+                                    <h2>Start posting your property, it’s free</h2>
+                                    <p style="font-size: 10px;">Add Basic Details</p>
+                                    <div>You're looking to <span id="preference-text">...</span></div>
+                                    <div id="preference-input" data-label="BUSINESS_SEGMENT">
+                                        <div style="display: flex; gap: 20px;" id="preference">
+                                            <div id="S" class="preference-option" data-label="VALUE" onclick="selectPreference('Sell', 'S')">
+                                                <span>Sell</span>
+                                            </div>
+                                            <div id="R" class="preference-option" data-label="VALUE" onclick="selectPreference('Rent / Lease', 'R')">
+                                                <span>Rent / Lease</span>
+                                            </div>
+                                            <div id="P" class="preference-option" data-label="VALUE" onclick="selectPreference('PG', 'P')">
+                                                <span>PG</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="preference-value" name="preference">
+                                </div>
+                            </div>
+                            <div id="CollapsibleSuperProptype-widget">
+                                <div>
+                                    <div style="font-size: 15px;">And it’s a <span>...</span></div>
+                                    <div id="resCom-input">
+                                        <div class="property-container">
+                                            <select id="property-type" class="property-select" name="property-type" onchange="togglePropertyOptions()">
+                                                <option value="" disabled selected>Select Property Type</option>
+                                                <option value="residential">Residential</option>
+                                                <option value="commercial">Commercial</option>
+                                            </select>
+                                            <div id="residential-options" class="options-container" style="display: none;">
+                                                <div class="option-group">
+                                                    <label>
+                                                        <input type="checkbox" name="residential-property" value="flat/apartment">
+                                                        Flat/Apartment
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" name="residential-property" value="independent house/villa">
+                                                        Independent House/Villa
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" name="residential-property" value="independent/builder floor">
+                                                        Independent/Builder Floor
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" name="residential-property" value="plot/land">
+                                                        Plot/Land
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" name="residential-property" value="serviced apartment">
+                                                        Serviced Apartment
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" name="residential-property" value="farm house">
+                                                        Farm House
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" name="residential-property" value="others">
+                                                        Others
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div id="commercial-options" class="options-container" style="display: none;">
+                                                <div class="option-group">
+                                                    <label>
+                                                        <input type="checkbox" name="commercial-property" value="office">
+                                                        Office
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" name="commercial-property" value="retail">
+                                                        Retail
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" name="commercial-property" value="industry">
+                                                        Industry
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" name="commercial-property" value="hospitality">
+                                                        Hospitality
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" name="commercial-property" value="plot/land">
+                                                        Plot/Land
+                                                    </label>
+                                                    <label>
+                                                        <input type="checkbox" name="commercial-property" value="others">
+                                                        Others
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="spacer16"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Contact Details Section -->
+                        <div id="LoginInput-widget">
+                            <div class="widgetbox_white_box__1v7xz undefined undefined undefined">
+                                <div class="widgetbox_header_text__2BXc_">
+                                    <div class="xidHeading_PageHeadingwrap__3z0kL">
+                                        <div>
+                                            <div class="list_header_semiBold xidHeading_PageHeading__3ZQJk">
+                                                <div>
+                                                    <span class="xidHeading_headingText__Ulc2a">Your contact details for the buyer to reach you</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="eoiLyr_inpWrap phone_inpWraP pageComponent loginInput_phoneField__3UczU commonInput_lightBorder__2rEvQ" tabindex="1" data-attr="inputWrapper" data-label="PHONE">
+                                        <div class="phnCodeVal eoiarrow false">
+                                            <select qa-id="countryCode" class="cCode" name="country_code" required>
+                                                <option value="+91">+91 IND</option>
+                                                <!-- Add other country options here -->
+                                            </select>
+                                        </div>
+                                        <input type="number" qa-id="mobileNumber" class="pl50" data-for="phnNumber" data-attr="inputText" name="phone" placeholder="Phone Number" required>
+                                        <div class="leftIcon">
+                                            <i class="iconS_PPFDesk_20 icon_phone"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="submit-button">Submit</button>
+                    </div>
+                </form>
+            </div>
+            
+     </div>
+
+     <!-- post property section -->
+     <div style="margin-top: 20px;" class="property-section">
+        <h5>How To Post</h5>
+        <h2>Post Your Property in 3 Simple Steps</h2>
+        <div class="card-container">
+            <div  class="card">
+                <div class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1z"/>
+                    </svg>
+                </div>
+                <h3>01.Create an Account</h3>
+                <p>Sign up on our platform to create an account and start your property posting journey.</p>
+            </div>
+            <div class="card">
+                <div class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">
+                        <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/>
+                        <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"/>
+                      </svg>
+                </div>
+                <h3>02. Fill Property Details</h3>
+                <p>Provide detailed information about your property, including location, type, and price.</p>
+            </div>
+            <div class="card">
+                <div class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-ui-checks" viewBox="0 0 16 16">
+                        <path d="M7 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zM2 1a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm0 8a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2zm.854-3.646a.5.5 0 0 1-.708 0l-1-1a.5.5 0 1 1 .708-.708l.646.647 1.646-1.647a.5.5 0 1 1 .708.708zm0 8a.5.5 0 0 1-.708 0l-1-1a.5.5 0 0 1 .708-.708l.646.647 1.646-1.647a.5.5 0 0 1 .708.708zM7 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm0-5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+                    </svg>
+                </div>
+                <h3> 03.Publish Your Listing</h3>
+                <p>Review your details and publish your property listing to reach potential buyers or renters.</p>
+            </div>
+        </div>
+    </div>
+    <button style="margin-left: 45%; background-color: rgb(66, 144, 240); border-radius: 5px; padding: 5px;"><a style="text-decoration: none; color: #f0f0f0;" href="#CollapsiblePreference-widget">Begin To Post Your Property</a></button>
+
+
+    <!-- info -->
+    <section class="info">
+        <div class="info-content">
+            <h5 class="info-subtitle">ADDITIONAL BENEFITS</h5>
+            <h1 class="info-title">Accelerate the Sale or Rental of Your Property with GDA GKP</h1>
+            <p class="info-text">
+                Discover how GDA GKP can streamline the process of selling or renting your property. Our platform allows you to post free property ads and reach a wide audience of potential buyers and renters. With enhanced visibility and a user-friendly interface, your property will attract the right attention more efficiently. GDA GKP's advanced tools and resources support you at every step, ensuring a smooth and successful transaction.
+            </p>
+            <p class="info-text">
+                Our comprehensive services include detailed property listings, high-quality images, and targeted marketing strategies to maximize your property's exposure. We offer insightful analytics and market trends to help you make informed decisions. Whether you’re selling a residential home or renting commercial space, GDA GKP provides the expertise and support you need to achieve your goals quickly and effectively.
+            </p>
+            <p class="info-text">
+                Join our community of satisfied clients who have successfully navigated the property market with ease. By choosing GDA GKP, you're partnering with a trusted name in real estate that values transparency, efficiency, and client satisfaction. Don't miss out on the opportunity to elevate your property’s potential.
+            </p>
+            <a class="info-button" href="#CollapsiblePreference-widget">Begin Posting Your Property</a>
+        </div>
+    </section>
+    
+    
+
+    <div style="margin-top: 30px;" class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="accordion">
+            <div class="accordion-item">
+                <button class="accordion-button">What are the different types of real estate properties?</button>
+                <div class="accordion-content">
+                    <p>Real estate properties are generally categorized into residential, commercial, industrial, and land. Residential properties include apartments, houses, and villas. Commercial properties include office spaces, retail shops, and malls. Industrial properties include factories and warehouses. Land includes plots for construction, agricultural land, and undeveloped land.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-button">How do I determine the value of a property?</button>
+                <div class="accordion-content">
+                    <p>The value of a property can be determined by several factors, including location, size, condition, and market trends. You can also get a professional appraisal or use online tools to estimate the value. Comparing similar properties in the same area can provide a good benchmark.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-button">What should I consider before buying a property?</button>
+                <div class="accordion-content">
+                    <p>Before buying a property, consider factors such as your budget, the location, the condition of the property, future development plans in the area, and legal clearances. It's also important to inspect the property thoroughly and get a professional evaluation if necessary.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-button">What are the steps involved in selling a property?</button>
+                <div class="accordion-content">
+                    <p>The steps involved in selling a property include setting a competitive price, preparing the property for sale, marketing it effectively, negotiating with potential buyers, and completing the necessary legal and financial paperwork. Hiring a real estate agent can help streamline the process.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- testimonial starts -->
+ <section class="testimonial-section">
+    <div class="testimonial-header">
+        <h6>Testimonials</h6>
+        <h1>What our customers are saying about GDA Gkp Property</h1>
+        <p>Hear from our satisfied buyers, tenants, owners, and dealers</p>
+    </div>
+    <div class="testimonial-slider">
+        <button class="slider-prev">&#10094;</button>
+        <div class="testimonial-cards-wrapper">
+            <div class="testimonial-cards">
+                <div class="testimonial-card">
+                    <div>
+                        <img style="height: 100px; width: 90px;" src="https://png.pngtree.com/background/20211216/original/pngtree-business-men-daytime-professional-boy-office-listening-photography-pictures-with-pictures-picture-image_1510839.jpg" alt="Customer Image">
+                        <h4>Siddharth Kashyap</h4>
+                        <p>Owner, Kolkata</p>
+                    </div>
+                    <p>You get an exclusive RM from GDA team who tracks your property closely</p>
+                </div>
+                <div class="testimonial-card">
+                    <div>
+                        <img style="height: 100px; width: 90px;" src="https://png.pngtree.com/background/20211216/original/pngtree-business-men-daytime-professional-boy-office-listening-photography-pictures-with-pictures-picture-image_1510839.jpg" alt="Customer Image">
+                        <h4>Siddharth Kashyap</h4>
+                        <p>Owner, Kolkata</p>
+                    </div>
+                    <p>You get an exclusive RM from GDA team who tracks your property closely</p>
+                </div>
+                <div class="testimonial-card">
+                    <div>
+                        <img style="height: 100px; width: 90px;" src="https://png.pngtree.com/background/20211216/original/pngtree-business-men-daytime-professional-boy-office-listening-photography-pictures-with-pictures-picture-image_1510839.jpg" alt="Customer Image">
+                        <h4>Siddharth Kashyap</h4>
+                        <p>Owner, Kolkata</p>
+                    </div>
+                    <p>You get an exclusive RM from GDA team who tracks your property closely</p>
+                </div>
+                <div class="testimonial-card">
+                    <div>
+                        <img style="height: 100px; width: 90px;" src="https://png.pngtree.com/background/20211216/original/pngtree-business-men-daytime-professional-boy-office-listening-photography-pictures-with-pictures-picture-image_1510839.jpg" alt="Customer Image">
+                        <h4>Siddharth Kashyap</h4>
+                        <p>Owner, Kolkata</p>
+                    </div>
+                    <p>You get an exclusive RM from GDA team who tracks your property closely</p>
+                </div>
+                <div class="testimonial-card">
+                    <div>
+                        <img style="height: 100px; width: 90px;" src="https://png.pngtree.com/background/20211216/original/pngtree-business-men-daytime-professional-boy-office-listening-photography-pictures-with-pictures-picture-image_1510839.jpg" alt="Customer Image">
+                        <h4>Siddharth Kashyap</h4>
+                        <p>Owner, Kolkata</p>
+                    </div>
+                    <p>You get an exclusive RM from GDA team who tracks your property closely</p>
+                </div>
+            </div>
+        </div>
+        <button class="slider-next">&#10095;</button>
+    </div>
+</section>
+
+
+
+  <!-- testimonial ends -->
+
+ <!-- ad section -->
+  <!-- <div>
+    <a href="#"><img style="width: 85%; height: 350px; margin: 50px; padding-left: 90px;" src="https://static.99acres.com/universalhp/img/d_hp_app_banner_default.webp" alt=""></a>
+  </div> -->
+
+<!-- footer starts -->
+<footer class="footer-section">
+    <div class="footer-columns">
+        <div class="footer-column">
+            <h3>GDA Gkp Property</h3>
+            <ul>
+                <li><a href="#">Mobile Apps</a></li>
+                <li><a href="#">Our Services</a></li>
+                <li><a href="#">Price Trends</a></li>
+                <li><a href="#">Post your Property</a></li>
+                <li><a href="#">Real Estate Investments</a></li>
+                <li><a href="#">Builders in India</a></li>
+                <li><a href="#">Area Converter</a></li>
+                <li><a href="#">Articles</a></li>
+                <li><a href="#">Rent Receipt</a></li>
+                <li><a href="#">Customer Service</a></li>
+                <li><a href="#">Sitemap</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Company</h3>
+            <ul>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">Careers with us</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Request Info</a></li>
+                <li><a href="#">Feedback</a></li>
+                <li><a href="#">Report a problem</a></li>
+                <li><a href="#">Testimonials</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Summons/Notices</a></li>
+                <li><a href="#">Grievances</a></li>
+                <li><a href="#">Safety Guide</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Our Partners</h3>
+            <ul>
+                <li><a href="#">Naukri.com - Jobs in India</a></li>
+                <li><a href="#">Naukrigulf.com - Jobs in middle east</a></li>
+                <li><a href="#">Jeevansathi.com - Matrimonials</a></li>
+                <li><a href="#">Brijj.com - Professional Networking</a></li>
+                <li><a href="#">Shiksha.com - Education Career Info</a></li>
+                <li><a href="#">Policybazaar.com - Insurance India</a></li>
+                <li><a href="#">Meritnation.com - Online Educational Assessment</a></li>
+                <li><a href="#">PaisaBazaar.com</a></li>
+                <li><a href="#">AmbitionBox.com</a></li>
+                <li><a href="#">FirstNaukri.com - A jobsite for campus hiring</a></li>
+                <li><a href="#">Jobhai.com – Find Jobs Near You</a></li>
+                <li><a href="#">Techminis.com - Tech news on the go</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-column contact-column">
+        <h3>Contact Us</h3>
+        <p>Toll Free - 1800 41 99099</p>
+        <p>9:30 AM to 6:30 PM (Mon-Sun)</p>
+        <p>Email - feedback@gdagkp.com</p>
+        <h4>Connect with us</h4>
+        <div class="social-media-icons">
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+              </svg></a>
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+                <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+              </svg></a>
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+              </svg></a>
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
+                <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/>
+              </svg></a>
+        </div>
+        <p>Download the App</p>
+        <div class="app-buttons">
+            <a href="#" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="app-badge">
+            </a>
+            <a href="#" target="_blank">
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="app-badge">
+            </a>
+        </div>
+        <p style="font-size: 10px; color: #67696d;">Usage of GDAGkp_property.com to upload content showing area in non standard units or which enables targeting by religion/community/caste/race is prohibited. Please report inappropriate content by writing to us at <a href="mailto:">report abuse</a></p>
+        <p>All trademarks are the property of their respective owners. All rights reserved - Info Edge (India) Ltd. A naukri.com group venture.</p>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+    function selectPreference(preference, id) {
+        document.getElementById('preference-value').value = preference;
+        document.getElementById('preference-text').innerText = preference;
+        document.querySelectorAll('.preference-option').forEach(option => {
+            option.classList.remove('selected');
+        });
+        document.getElementById(id).classList.add('selected');
+    }
+
+    function togglePropertyOptions() {
+        const propertyType = document.getElementById('property-type').value;
+        const residentialOptions = document.getElementById('residential-options');
+        const commercialOptions = document.getElementById('commercial-options');
+
+        if (propertyType === 'residential') {
+            residentialOptions.style.display = 'block';
+            commercialOptions.style.display = 'none';
+        } else if (propertyType === 'commercial') {
+            commercialOptions.style.display = 'block';
+            residentialOptions.style.display = 'none';
+        } else {
+            residentialOptions.style.display = 'none';
+            commercialOptions.style.display = 'none';
+        }
+    }
+
+    document.getElementById('property-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        const whatsappNumber = '+1234567890'; // Replace with your WhatsApp number
+        const message = Array.from(formData.entries()).map(entry => `${entry[0]}: ${entry[1]}`).join('\n');
+
+        window.open(`https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`);
+    });
+</script>
+
+
+    <script>
+       function selectPreference(preference) {
+    document.getElementById('preference-value').value = preference;
+    document.querySelectorAll('#preference div').forEach(div => div.classList.remove('selected'));
+    document.getElementById(preference.charAt(0)).classList.add('selected');
+}
+
+function togglePropertyOptions() {
+    const propertyType = document.getElementById('property-type').value;
+    document.getElementById('residential-options').style.display = propertyType === 'residential' ? 'block' : 'none';
+    document.getElementById('commercial-options').style.display = propertyType === 'commercial' ? 'block' : 'none';
+}
+
+document.getElementById('property-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const preference = document.getElementById('preference-value').value;
+    const propertyType = document.getElementById('property-type').value;
+    const phone = document.querySelector('input[name="phone"]').value;
+    const countryCode = document.querySelector('select[name="country_code"]').value;
+    
+    let selectedProperties = [];
+    document.querySelectorAll(`input[name="${propertyType}-property"]:checked`).forEach(checkbox => {
+        selectedProperties.push(checkbox.value);
+    });
+
+    const message = `Preference: ${preference}\nProperty Type: ${propertyType}\nSelected Properties: ${selectedProperties.join(', ')}\nPhone: ${countryCode} ${phone}`;
+    const whatsappUrl = `https://wa.me/919876543210?text=${encodeURIComponent(message)}`;
+    
+    window.open(whatsappUrl, '_blank');
+});
+
+    </script>
+
+    <!-- FAQ -->
+     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const accordionButtons = document.querySelectorAll('.accordion-button');
+
+    accordionButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const content = this.nextElementSibling;
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        });
+    });
+});
+     </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const prevButton = document.querySelector('.slider-prev');
+    const nextButton = document.querySelector('.slider-next');
+    const testimonialCards = document.querySelector('.testimonial-cards');
+    const cards = Array.from(document.querySelectorAll('.testimonial-card'));
+    let currentIndex = 0;
+
+    function updateSliderPosition() {
+        const cardWidth = cards[0].offsetWidth + 20; // card width + margin
+        const maxIndex = cards.length - Math.floor(testimonialCards.parentElement.offsetWidth / cardWidth);
+        testimonialCards.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+
+        // Disable buttons at the ends
+        prevButton.disabled = currentIndex === 0;
+        nextButton.disabled = currentIndex >= maxIndex;
+    }
+
+    prevButton.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateSliderPosition();
+        }
+    });
+
+    nextButton.addEventListener('click', () => {
+        const cardWidth = cards[0].offsetWidth + 20; // card width + margin
+        const maxIndex = cards.length - Math.floor(testimonialCards.parentElement.offsetWidth / cardWidth);
+        if (currentIndex < maxIndex) {
+            currentIndex++;
+            updateSliderPosition();
+        }
+    });
+
+    window.addEventListener('resize', updateSliderPosition);
+    updateSliderPosition();
+});
+
+</script>
+
+</body>
+
+</html>
